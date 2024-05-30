@@ -28,7 +28,6 @@ dependencies {
     testImplementation 'org.jetbrains.kotlin:kotlin-test'
     // Spring Boot
     testImplementation("org.springframework.boot:spring-boot-starter-test:${springBootVersion}")
-    implementation("org.springframework.boot:spring-boot-starter-data-jpa:${springBootVersion}")
     implementation("org.springframework.boot:spring-boot-starter-mustache:${springBootVersion}")
     implementation("org.springframework.boot:spring-boot-starter-web:${springBootVersion}")
     implementation("org.springframework.boot:spring-boot-starter-security:${springBootVersion}")
