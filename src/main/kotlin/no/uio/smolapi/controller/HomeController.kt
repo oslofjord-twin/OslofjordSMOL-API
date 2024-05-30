@@ -36,9 +36,7 @@ open class HomeController {
     ])
     @PostMapping("/select")
     fun selectData(@SwaggerRequestBody(description = "Request for data retrieval") @RequestBody request: QueryRequest): ResponseEntity<String> {
-        println("Received query: ${request.query}")
         log.info("Received query: ${request.query}")
-        log.debug("Received query: ${request.query}")
 
         return ResponseEntity.ok("Query executed successfully")
     }
