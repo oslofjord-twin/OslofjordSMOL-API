@@ -1,4 +1,4 @@
-package no.uio.no.uio.smolapi
+package no.uio.smolapi
 
 import no.uio.smolapi.controller.HomeController
 import org.springframework.boot.SpringApplication
