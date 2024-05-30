@@ -14,7 +14,6 @@ import org.slf4j.LoggerFactory
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.http.ResponseEntity
 import org.apache.jena.query.QueryExecution
-import org.apache.jena.query.QueryExecutionFactory
 
 data class QueryRequest(val parameters: List<List<String>>, val name: String? = null)
 
@@ -49,7 +48,7 @@ open class HomeController {
           ?b1 owl:hasValue ?name ;
               owl:onProperty ast:Name .
         """.trimIndent()
-        
+
         if (name != null) {
             graphQlData += """
         FILTER (?name = "$name"^^xsd:string)
