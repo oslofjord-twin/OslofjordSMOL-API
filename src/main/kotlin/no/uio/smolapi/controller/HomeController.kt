@@ -19,7 +19,6 @@ import kotlinx.serialization.json.Json
 
 data class QueryRequest(val parameters: List<List<String>>, val name: String? = null)
 
-@SpringBootApplication
 @RestController
 @RequestMapping("/api")
 open class HomeController {
