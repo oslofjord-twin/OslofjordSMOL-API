@@ -1,8 +1,11 @@
 package no.uio.smolapi
 
-import no.uio.smolapi.controller.HomeController
 import org.springframework.boot.SpringApplication
+import org.springframework.boot.autoconfigure.SpringBootApplication
+
+@SpringBootApplication
+open class Api
 
 fun main(args: Array<String>) {
-    SpringApplication.run(HomeController::class.java, *args)
+    SpringApplication.run(Api::class.java, *args)
 }
