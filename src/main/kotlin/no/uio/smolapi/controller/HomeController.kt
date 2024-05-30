@@ -14,6 +14,8 @@ import org.slf4j.LoggerFactory
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.http.ResponseEntity
 import org.apache.jena.query.QueryExecution
+import kotlinx.serialization.encodeToString
+import kotlinx.serialization.json.Json
 
 data class QueryRequest(val parameters: List<List<String>>, val name: String? = null)
 
@@ -89,7 +91,7 @@ open class HomeController {
         ApiResponse(responseCode = "500", description = "Internal server error")
     ])
     @PostMapping("/select")
-    fun selectData(@SwaggerRequestBody(description = "Request for data retrieval") @RequestBody request: QueryRequest): ResponseEntity<String> {
+    fun selectData(@SwaggerRequestBody(description = "Request for data retrieval") @RequestBody request: QueryRequest): String {
         log.info("Received parameters for query: ${request.parameters}")
 
         val query = queryGenerator(request.parameters, request.name)
@@ -99,11 +101,30 @@ open class HomeController {
         val q = QueryExecution.service("$fusekiEndpoint/query", query)
         val results = q.execSelect()
 
-        while (results.hasNext()) {
-            val soln = results.nextSolution()
-            log.info(soln.toString())
+        val resultMap = mutableMapOf<String, String>()
+        val json = Json { prettyPrint = true }
+
+        if (!results.hasNext()) {
+            log.info("No results found")
+            return json.encodeToString{"No results found"}
         }
 
-        return ResponseEntity.ok("Query executed successfully")
+        while (results.hasNext()) {
+            val soln = results.nextSolution()
+            val resultString = soln.toString()
+            val pattern = "\\(\\s\\?(.*?)\\s=\\s(.*?)\\s\\)".toRegex()
+
+            pattern.findAll(resultString).forEach { matchResult ->
+                val key = matchResult.groupValues[1]
+                val value = matchResult.groupValues[2].replace("\"", "")
+                resultMap[key] = value
+            }
+
+            log.info("Parsed result: $resultMap")
+        }
+
+        val jsonResult = json.encodeToString(resultMap)
+
+        return jsonResult
     }
 }
