@@ -32,7 +32,7 @@ dependencies {
     testImplementation("org.springframework.boot:spring-boot-starter-test:${springBootVersion}")
     implementation("org.springframework.boot:spring-boot-starter-mustache:${springBootVersion}")
     implementation("org.springframework.boot:spring-boot-starter-web:${springBootVersion}")
-//    implementation("org.springframework.boot:spring-boot-starter-security:${springBootVersion}")
+    implementation("org.springframework.boot:spring-boot-starter-security:${springBootVersion}")
     implementation("org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}")
     // Jackson
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin:${jacksonVersion}")
