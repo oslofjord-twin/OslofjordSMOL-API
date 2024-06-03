@@ -70,15 +70,3 @@ kotlin {
     jvmToolchain(17)
 }
 
-jar {
-//    archiveFileName='smol-api.jar'
-    manifest {
-        attributes 'Main-Class': 'no.uio.smolapi.MainKt'
-    }
-}
-shadowJar {
-    configurations = [project.configurations.runtimeClasspath]
-    mergeServiceFiles()
-    archiveFileName='smol-api.jar'
-}
-assemble.dependsOn shadowJar
