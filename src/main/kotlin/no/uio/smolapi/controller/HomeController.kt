@@ -23,7 +23,7 @@ data class QueryRequest(val parameters: List<List<String>>, val name: String? = 
 @RequestMapping("/api")
 open class HomeController {
     private val log : Logger = LoggerFactory.getLogger(this.javaClass);
-    private val fusekiHost = System.getenv("HASURA_HOST") ?: "localhost"
+    private val fusekiHost = System.getenv("FUSEKI_HOST") ?: "localhost"
     private val fusekiEndpoint = "http://$fusekiHost:3030/ds"
 
     private fun queryGenerator(parameters : List<List<String>>, name: String?): String {
